@@ -186,7 +186,7 @@ module ActiveRecord
 
           def connection_active?
             @connection.status == PG::Connection::CONNECTION_OK
-          rescue PGError
+          rescue PG::Error
             false
           end
       end
@@ -227,7 +227,7 @@ module ActiveRecord
       def active?
         @connection.query 'SELECT 1'
         true
-      rescue PGError
+      rescue PG::Error
         false
       end
 
@@ -526,7 +526,7 @@ module ActiveRecord
           # FEATURE_NOT_SUPPORTED.  Check here for more details:
           # http://git.postgresql.org/gitweb/?p=postgresql.git;a=blob;f=src/backend/utils/cache/plancache.c#l573
           begin
-            code = pgerror.result.result_error_field(PGresult::PG_DIAG_SQLSTATE)
+            code = pgerror.result.result_error_field(PG::Result::PG_DIAG_SQLSTATE)
           rescue
             raise e
           end

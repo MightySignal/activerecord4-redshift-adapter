@@ -4,7 +4,7 @@ module ActiveRecord::ConnectionAdapters
   class PostgreSQLAdapter < AbstractAdapter
     class InactivePGconn
       def query(*args)
-        raise PGError
+        raise PG::Error
       end
 
       def status

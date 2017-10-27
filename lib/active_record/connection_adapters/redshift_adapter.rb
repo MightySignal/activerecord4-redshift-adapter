@@ -582,6 +582,9 @@ module ActiveRecord
           if @config[:encoding]
             @connection.set_client_encoding(@config[:encoding])
           end
+
+          @connection.type_map_for_results = PG::BasicTypeMapForResults.new @connection
+
           self.schema_search_path = @config[:schema_search_path] || @config[:schema_order]
 
           # SET statements from :variables config hash
